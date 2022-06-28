@@ -1,27 +1,137 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import Header from '@/layouts/Header.vue'
+import Footer from '@/layouts/Footer.vue'
+import ImgGround from '@/layouts/ImgGround.vue'
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-  <div class="lds-ellipsis">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
+  <main v-cloak>
+    <div class="app">
+      <div class="app-main">
+        <Header></Header>
+        <ImgGround></ImgGround>
+        <Footer></Footer>
+      </div>
+      <div class="filter-list"></div>
+    </div>
+    <div class="app-loading">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </main>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+[v-cloak].app-loading {
+  background-color: #0099ff;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @keyframes lds-roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .lds-roller {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    div {
+      animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      transform-origin: 40px 40px;
+      &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #fff;
+        margin: -4px 0 0 -4px;
+      }
+      &:nth-child(1) {
+        animation-delay: -0.036s;
+        &:after {
+          top: 63px;
+          left: 63px;
+        }
+      }
+      &:nth-child(2) {
+        animation-delay: -0.072s;
+        &:after {
+          top: 68px;
+          left: 56px;
+        }
+      }
+      &:nth-child(3) {
+        animation-delay: -0.108s;
+        &:after {
+          top: 71px;
+          left: 48px;
+        }
+      }
+      &:nth-child(4) {
+        animation-delay: -0.144s;
+        &:after {
+          top: 72px;
+          left: 40px;
+        }
+      }
+      &:nth-child(5) {
+        animation-delay: -0.18s;
+        &:after {
+          top: 71px;
+          left: 32px;
+        }
+      }
+      &:nth-child(6) {
+        animation-delay: -0.216s;
+        &:after {
+          top: 68px;
+          left: 24px;
+        }
+      }
+      &:nth-child(7) {
+        animation-delay: -0.252s;
+        &:after {
+          top: 63px;
+          left: 17px;
+        }
+      }
+      &:nth-child(8) {
+        animation-delay: -0.288s;
+        &:after {
+          top: 56px;
+          left: 12px;
+        }
+      }
+    }
+  }
+}
+[v-cloak].app {
+  .app-main {
+    display: none;
+  }
+}
+.app {
+  .app-main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
 }
 </style>
