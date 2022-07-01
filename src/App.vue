@@ -2,6 +2,7 @@
 import Header from '@/layouts/Header.vue'
 import Footer from '@/layouts/Footer.vue'
 import ImgGround from '@/layouts/ImgGround.vue'
+import Operation from '@/layouts/Operation.vue'
 </script>
 
 <template>
@@ -12,7 +13,7 @@ import ImgGround from '@/layouts/ImgGround.vue'
         <ImgGround></ImgGround>
         <Footer></Footer>
       </div>
-      <div class="filter-list"></div>
+      <Operation></Operation>
     </div>
     <div class="app-loading">
       <div class="lds-roller">
@@ -128,7 +129,10 @@ import ImgGround from '@/layouts/ImgGround.vue'
   }
 }
 .app {
+  display: flex;
+
   .app-main {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     height: 100vh;
