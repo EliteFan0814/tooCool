@@ -3,12 +3,14 @@ import Header from '@/layouts/Header.vue'
 import Footer from '@/layouts/Footer.vue'
 import ImgGround from '@/layouts/ImgGround.vue'
 import Operation from '@/layouts/Operation.vue'
+import { userStore } from '@/stores/user'
+const userSettingsStore = userStore()
 </script>
 
 <template>
   <main v-cloak>
     <div class="app">
-      <div class="app-main">
+      <div class="app-main" :class="{ collapsed: userSettingsStore.isCollapsed }">
         <Header></Header>
         <ImgGround></ImgGround>
         <Footer></Footer>
@@ -129,13 +131,22 @@ import Operation from '@/layouts/Operation.vue'
   }
 }
 .app {
-  display: flex;
+  overflow: hidden;
 
   .app-main {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     height: 100vh;
+    padding-right: 20rem;
+    @media (prefers-reduced-motion: no-preference) {
+      & {
+        transition: padding-right 0.5s;
+        will-change: padding-right;
+      }
+    }
+  }
+  .collapsed {
+    padding-right: 0rem;
   }
 }
 </style>
