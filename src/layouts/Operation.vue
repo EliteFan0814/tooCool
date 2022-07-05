@@ -6,11 +6,10 @@
   </aside>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { userStore } from '@/stores/user'
 const userSettingsStore = userStore()
 const handleShow = () => {
-  userSettingsStore.exchangeCollapsed()
+  userSettingsStore.exchangeCollapsed(!userSettingsStore.isCollapsed)
 }
 </script>
 <style lang="scss" scoped>
@@ -19,9 +18,9 @@ const handleShow = () => {
   top: 0;
   right: 0;
   height: 100%;
+  width: 20rem;
   border: 1px solid red;
   background-color: #fff;
-  width: 20%;
   @media (prefers-reduced-motion: no-preference) {
     & {
       transition: transform 0.5s;
@@ -29,6 +28,14 @@ const handleShow = () => {
     }
   }
 
+  &.collapsed {
+    transform: translateX(100%);
+    .trigger {
+      transition: transform 0.5s;
+      transform: rotateY(-180deg);
+      left: -30px;
+    }
+  }
   .trigger {
     border-radius: 50%;
     background-color: #fff;
@@ -40,14 +47,6 @@ const handleShow = () => {
     .iconfont {
       font-size: 30px;
       line-height: 30px;
-    }
-  }
-  &.collapsed {
-    transform: translateX(100%);
-    .trigger {
-      transition: transform 0.5s;
-      transform: rotateY(-180deg);
-      left: -30px;
     }
   }
 }

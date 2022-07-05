@@ -4,7 +4,17 @@ import Footer from '@/layouts/Footer.vue'
 import ImgGround from '@/layouts/ImgGround.vue'
 import Operation from '@/layouts/Operation.vue'
 import { userStore } from '@/stores/user'
+import { onMounted } from 'vue'
 const userSettingsStore = userStore()
+onMounted(() => {
+  window.onresize = () => {
+    if (window.innerWidth > 800) {
+      userSettingsStore.exchangeCollapsed(false)
+    } else {
+      userSettingsStore.exchangeCollapsed(true)
+    }
+  }
+})
 </script>
 
 <template>

@@ -2,11 +2,11 @@ import { defineStore } from 'pinia'
 
 export const userStore = defineStore('user', {
   state: () => {
-    return { isCollapsed: false }
+    return { isCollapsed: window.innerWidth < 800 }
   },
   actions: {
-    exchangeCollapsed() {
-      this.isCollapsed = !this.isCollapsed
+    exchangeCollapsed(flag: boolean) {
+      this.isCollapsed = flag
     }
   }
 })
