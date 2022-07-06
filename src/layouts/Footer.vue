@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   padding: 5px 15px;
-
+  color: var.$color;
   background-color: var.$color-bg;
 }
 </style>

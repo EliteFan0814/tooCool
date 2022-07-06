@@ -15,8 +15,9 @@ import Logo from '@/components/Logo.vue'
   display: flex;
   align-items: center;
   padding: 5px 15px;
+  color: var.$color;
   background-color: var.$color-bg;
-  h2{
+  h2 {
     padding-left: 1rem;
   }
 }

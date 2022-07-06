@@ -1,5 +1,16 @@
 <template>
   <aside class="operation" :class="{ collapsed: userSettingsStore.isCollapsed }">
+    <div class="all-type">
+      <section v-for="item in typeList" :key="item.id" class="type-wrap">
+        <h2>{{ item.type }}</h2>
+        <div class="type">
+          <div v-for="typeItem in item.list" :key="typeItem.id" class="type-item">
+            <i :class="{ iconfont: true, [typeItem.logo]: true }"></i>
+            <span>{{ typeItem.name }}</span>
+          </div>
+        </div>
+      </section>
+    </div>
     <div class="trigger" @click="handleShow">
       <i class="iconfont icon-pullright"></i>
     </div>
@@ -7,20 +18,39 @@
 </template>
 <script lang="ts" setup>
 import { userStore } from '@/stores/user'
+import { onMounted, reactive, ref } from 'vue'
 const userSettingsStore = userStore()
 const handleShow = () => {
   userSettingsStore.exchangeCollapsed(!userSettingsStore.isCollapsed)
 }
+let typeList = reactive([
+  {
+    type: '风景',
+    id: 0,
+    list: [
+      { logo: 'icon-shan', name: '山', id: 0 },
+      { logo: 'icon-shan', name: '山', id: 1 },
+      { logo: 'icon-shan', name: '山', id: 2 },
+      { logo: 'icon-shan', name: '山', id: 3 }
+    ]
+  }
+])
+onMounted(() => {
+  typeList = []
+})
 </script>
 <style lang="scss" scoped>
+@use '../styles/var';
+
 .operation {
   position: fixed;
   top: 0;
   right: 0;
   height: 100%;
   width: 20rem;
-  border: 1px solid red;
-  background-color: #fff;
+  color: var.$color;
+  background-color: var.$color-bg;
+  padding: 1rem;
   @media (prefers-reduced-motion: no-preference) {
     & {
       transition: transform 0.5s;
@@ -47,6 +77,41 @@ const handleShow = () => {
     .iconfont {
       font-size: 30px;
       line-height: 30px;
+    }
+  }
+  .all-type {
+    height: 100%;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+      background-color: #555;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: #555;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #f5f5f5;
+    }
+    .type-wrap {
+      .type {
+        display: flex;
+        flex-wrap: wrap;
+        .type-item {
+          width: 25%;
+          // border: 1px solid red;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          i {
+            font-size: 3rem;
+          }
+        }
+      }
     }
   }
 }
