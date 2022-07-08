@@ -3,10 +3,10 @@ import Header from '@/layouts/Header.vue'
 import Footer from '@/layouts/Footer.vue'
 import ImgGround from '@/layouts/ImgGround.vue'
 import Operation from '@/layouts/Operation.vue'
-import { userStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
 import loading from '@/assets/imgs/loading.gif'
-const userSettingsStore = userStore()
+const userSettingsStore = useUserStore()
 onMounted(() => {
   window.onresize = () => {
     if (window.innerWidth > 800) {
@@ -21,7 +21,10 @@ onMounted(() => {
 <template>
   <main v-cloak>
     <div class="app">
-      <div class="app-main" :class="{ collapsed: userSettingsStore.isCollapsed }">
+      <div
+        class="app-main"
+        :class="{ collapsed: userSettingsStore.isCollapsed }"
+      >
         <Header></Header>
         <ImgGround></ImgGround>
         <Footer></Footer>

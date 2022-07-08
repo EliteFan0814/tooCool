@@ -23,14 +23,15 @@
   </aside>
 </template>
 <script lang="ts" setup>
-import { userStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
+
 import { storeToRefs } from 'pinia'
 import { onMounted, reactive, ref } from 'vue'
-const userSettingsStore = userStore()
-const { isCollapsed } = storeToRefs(userSettingsStore)
+const userSettingsStore = useUserStore()
+const { isCollapsed, imageTypeId } = storeToRefs(userSettingsStore)
 const { exchangeCollapsed } = userSettingsStore
 const handleShow = () => {
-  exchangeCollapsed(!isCollapsed)
+  exchangeCollapsed(!isCollapsed.value)
 }
 interface TypeItemCell {
   logo: string
@@ -48,18 +49,18 @@ onMounted(() => {
   typeList.value = [
     {
       type: '风景',
-      id: 0,
+      id: 1,
       list: [
-        { logo: 'icon-shan', name: '山', id: 0, isActive: true },
-        { logo: 'icon-he', name: '水', id: 1, isActive: false }
+        { logo: 'icon-shan', name: '山', id: 10, isActive: true },
+        { logo: 'icon-he', name: '水', id: 11, isActive: false }
       ]
     },
     {
       type: '风景',
-      id: 1,
+      id: 2,
       list: [
-        { logo: 'icon-shan', name: '山', id: 0, isActive: false },
-        { logo: 'icon-he', name: '水', id: 1, isActive: false }
+        { logo: 'icon-shan', name: '山', id: 20, isActive: false },
+        { logo: 'icon-he', name: '水', id: 21, isActive: false }
       ]
     }
   ]
@@ -79,6 +80,7 @@ const handleExchangeType = (fatherId: number, typeItem: TypeItemCell) => {
         childItem.isActive = false
       })
     }
+    imageTypeId.value = typeItem.id
   })
 }
 </script>
