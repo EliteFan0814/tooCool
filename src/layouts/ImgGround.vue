@@ -5,21 +5,21 @@
     </div>
     <div class="exchange">
       <span class="pre reverse">
-        <i class="iconfont icon-pullright"></i>
+        <i class="iconfont icon-pullright" @click="handleExchangeImg"></i>
       </span>
       <span class="next">
-        <i class="iconfont icon-pullright"></i>
+        <i class="iconfont icon-pullright" @click="handleExchangeImg"></i>
       </span>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import request from '@/api/imageApi'
 import { useUserStore } from '@/stores/user'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 const userSettingsStore = useUserStore()
-
-let imgUrl = ref('https://dummyimage.com/2200x900/000/fff')
+let imgUrl = ref('')
 userSettingsStore.$subscribe((mutation, state) => {
   console.log(mutation.type, mutation.storeId, state)
   switch (state.imageTypeId) {
@@ -39,6 +39,15 @@ userSettingsStore.$subscribe((mutation, state) => {
       imgUrl.value = 'https://dummyimage.com/200x221/000/eee'
   }
 })
+onMounted(() => {
+  handleExchangeImg()
+})
+const handleExchangeImg = () => {
+  request.getImg('animal').then((res: any) => {
+    console.log(res, 'res')
+    imgUrl.value = res.imgUrl || ''
+  })
+}
 </script>
 <style lang="scss">
 .img-ground {
