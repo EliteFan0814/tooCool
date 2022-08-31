@@ -24,7 +24,7 @@
 </template>
 <script lang="ts" setup>
 import { useUserStore } from '@/stores/user'
-
+import { type ImageTypeItemSub, type ImageTypeItem, ImageType } from '@/types'
 import { storeToRefs } from 'pinia'
 import { onMounted, reactive, ref } from 'vue'
 const userSettingsStore = useUserStore()
@@ -33,39 +33,22 @@ const { exchangeCollapsed } = userSettingsStore
 const handleShow = () => {
   exchangeCollapsed(!isCollapsed.value)
 }
-interface TypeItemCell {
-  logo: string
-  name: string
-  id: number
-  isActive: boolean
-}
-interface TypeItem {
-  type: string
-  id: number
-  list: TypeItemCell[]
-}
-let typeList = ref<TypeItem[]>([])
+let typeList = ref<ImageTypeItem[]>([])
+console.log(Object.keys(ImageType))
+console.log(Object.values(ImageType))
 onMounted(() => {
   typeList.value = [
     {
-      type: '风景',
+      type: ImageType.NaturalScenery,
       id: 1,
       list: [
         { logo: 'icon-shan', name: '山', id: 10, isActive: true },
         { logo: 'icon-he', name: '水', id: 11, isActive: false }
       ]
     },
-    {
-      type: '风景',
-      id: 2,
-      list: [
-        { logo: 'icon-shan', name: '山', id: 20, isActive: false },
-        { logo: 'icon-he', name: '水', id: 21, isActive: false }
-      ]
-    }
   ]
 })
-const handleExchangeType = (fatherId: number, typeItem: TypeItemCell) => {
+const handleExchangeType = (fatherId: number, typeItem: ImageTypeItemSub) => {
   typeList.value.map((item) => {
     if (item.id === fatherId) {
       item.list.map((childItem) => {
