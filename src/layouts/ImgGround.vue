@@ -44,7 +44,6 @@ onMounted(() => {
 })
 const handleExchangeImg = () => {
   request.getImg('animal').then((res: any) => {
-    console.log(res, 'res')
     imgUrl.value = res.imgUrl || ''
   })
 }

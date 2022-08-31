@@ -6,3 +6,5 @@ import './assets/iconfont/iconfont.css'
 import { createPinia } from 'pinia'
 
 createApp(App).use(createPinia()).mount('#app')
+
+let a = 3
